@@ -7,7 +7,12 @@ import { fetchRevenue, fetchLatestInvoices, fetchCardData } from "../lib/data";
 export default async function Page() {
   const revenue = await fetchRevenue();
   const latestInvoices = await fetchLatestInvoices();
-  const card = await fetchCardData();
+  const {
+    totalPaidInvoices,
+    totalPendingInvoices,
+    numberOfInvoices,
+    numberOfCustomers,
+  } = await fetchCardData();
 
   return (
     <main>
@@ -15,24 +20,12 @@ export default async function Page() {
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <Card
-          title="Collected"
-          value={card.totalPaidInvoices}
-          type="collected"
-        />
-        <Card
-          title="Pending"
-          value={card.totalPendingInvoices}
-          type="pending"
-        />
-        <Card
-          title="Total Invoices"
-          value={card.numberOfInvoices}
-          type="invoices"
-        />
+        <Card title="Collected" value={totalPaidInvoices} type="collected" />
+        <Card title="Pending" value={totalPendingInvoices} type="pending" />
+        <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
         <Card
           title="Total Customers"
-          value={card.numberOfCustomers}
+          value={numberOfCustomers}
           type="customers"
         />
       </div>

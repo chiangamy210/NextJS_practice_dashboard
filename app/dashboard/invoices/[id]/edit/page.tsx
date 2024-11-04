@@ -25,4 +25,3 @@ export default async function page(props: { params: Promise<{ id: string }> }) {
     </main>
   );
 }
-//TODO update UUID
